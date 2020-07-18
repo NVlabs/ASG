@@ -5,7 +5,7 @@
 ### [Project](https://) | [Paper](https://arxiv.org/abs/2007.06965)
  
 Automated Synthetic-to-Real Generalization.<br>
-[Wuyang Chen](https://chenwydj.github.io/),  [Zhiding Yu](https://chrisding.github.io/), [Zhangyang Wang](https://www.atlaswang.com/), [Ming-Yu Liu](http://mingyuliu.net/), [Yong Jae Lee](https://web.cs.ucdavis.edu/~yjlee/), [Alexander G. Schwing](http://www.alexander-schwing.de/), [Jan Kautz](http://jankautz.com/), [Anima Anandkumar](http://tensorlab.cms.caltech.edu/users/anima/).<br>
+[Wuyang Chen](https://chenwydj.github.io/),  [Zhiding Yu](https://chrisding.github.io/), [Zhangyang Wang](https://www.atlaswang.com/), [Anima Anandkumar](http://tensorlab.cms.caltech.edu/users/anima/).<br>
 In ICML 2020.
  
 ## More details coming soon...
