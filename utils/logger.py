@@ -1,3 +1,6 @@
+# Copyright (c) 2020 NVIDIA Corporation. All rights reserved.
+# This work is licensed under a NVIDIA Open Source Non-commercial license.
+
 from pathlib import Path
 import importlib, warnings
 import os, sys, time, numpy as np
