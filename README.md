@@ -7,8 +7,12 @@
 Automated Synthetic-to-Real Generalization.<br>
 [Wuyang Chen](https://chenwydj.github.io/),  [Zhiding Yu](https://chrisding.github.io/), [Zhangyang Wang](https://www.atlaswang.com/), [Anima Anandkumar](http://tensorlab.cms.caltech.edu/users/anima/).<br>
 In ICML 2020.
- 
-## More details coming soon...
+
+* Visda-17 to COCO
+- [x] train resnet101 with only proxy guidance
+- [x] train resnet101 with both proxy guidance and L2O policy
+- [x] evaluation
+* GTA5 to Cityscapes
  
 ## Citation
  
