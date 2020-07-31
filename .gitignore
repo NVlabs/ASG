@@ -1,6 +1,3 @@
-# tmp python files
-__*.py
-
 # vim swp files
 *.swp
 # caffe/pytorch model files
@@ -11,7 +8,6 @@ crst_visda/runs/*
 *_softmax.txt
 *_seed*.txt
 *_soft*.txt
-# json
 *.json
 
 # Mkdocs
