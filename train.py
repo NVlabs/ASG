@@ -60,7 +60,7 @@ def main():
     else:
         args.save_dir = args.save_dir + \
             "/Visda17-Res101-%s-train.%s-LR%.2E-epoch%d-batch%d-seed%d"%(
-                   "LWF" if args.lwf > 0 else "XE", args.train_blocks, args.lr, args.epochs, args.batch_size, args.rand_seed) + \
+                   "LWF%.2f"%args.lwf if args.lwf > 0 else "XE", args.train_blocks, args.lr, args.epochs, args.batch_size, args.rand_seed) + \
             "%s/%s"%('/'+args.resume if args.resume != 'none' else '', args.timestamp)
     logger = prepare_logger(args)
 
