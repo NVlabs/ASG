@@ -241,7 +241,11 @@ def _resnet(arch, block, layers, pretrained, progress, **kwargs):
     if pretrained:
         from torchvision.models.utils import load_state_dict_from_url
         state_dict = load_state_dict_from_url(model_urls[arch], progress=progress)
-        model.load_state_dict(state_dict)
+        # model.load_state_dict(state_dict)
+        state = model.state_dict()
+        pretrained_dict = {k: v for k, v in state_dict.items() if k in state and state[k].size() == v.size()}
+        state.update(pretrained_dict)
+        model.load_state_dict(state)
     return model
 
 
