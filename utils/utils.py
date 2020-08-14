@@ -51,7 +51,8 @@ def save_checkpoint(name, state, is_best, filename='checkpoint.pth.tar', keep_la
     if len(models_paths) == keep_last:
         for i in range(len(models_paths) + 1 - keep_last):
             os.remove(models_paths[i])
-    filename = directory + 'epoch_'+str(state['epoch']) + '_' + filename
+    # filename = directory + '/epoch_'+str(state['epoch']) + '_' + filename
+    filename = directory + '/latest_' + filename
     torch.save(state, filename)
     if is_best:
         shutil.copyfile(filename, '%s/'%(name) + 'model_best.pth.tar')
