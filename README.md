@@ -50,6 +50,7 @@ python train.py \
 
 #### Train with L2O
 * Download [pretrained L2O Policy on Visda17](https://drive.google.com/file/d/1Rc2Ey-FspUagFPTjnEozeSEIdA4ir7b1/view?usp=sharing)
+* Put the checkpoint under `./ASG/pretrained/`
 * Put the code below in `l2o_train.sh`
 ```bash
 python train.py \
