@@ -21,6 +21,7 @@ from data.visda17 import VisDA17
 from model.resnet import resnet101
 from utils.utils import get_params, IterNums, save_checkpoint, AverageMeter, lr_poly, adjust_learning_rate, accuracy
 from utils.logger import prepare_logger, prepare_seed
+from utils.sgd import SGD
 
 CrossEntropyLoss = nn.CrossEntropyLoss(reduction='mean')
 KLDivLoss = nn.KLDivLoss(reduction='batchmean')
@@ -118,7 +119,7 @@ def main():
         else:
             sgd_in.append({'params': get_params(model, ["fc_new"]), 'lr': args.lr})
     base_lrs = [ group['lr'] for group in sgd_in ]
-    optimizer = torch.optim.SGD(sgd_in, lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
+    optimizer = SGD(sgd_in, lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
 
     # Optionally resume from a checkpoint
     if args.resume != 'none':
