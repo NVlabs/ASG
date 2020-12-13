@@ -16,7 +16,6 @@ def get_args():
     parser.add_argument('--momentum', default=0.9, type=float, help='momentum (default: 0.9)')
     parser.add_argument('--early-stop', default=1, type=int, dest='early_stop', help='limit the optimizer only sees partial optimizee epoch')
     parser.add_argument('--lwf', default=0., type=float, dest='lwf', help='weight of KL loss for LwF (default: 0)')
-    parser.add_argument('--switch-model', default='res50', choices=["res50", "deeplab", "res101", "vgg16"], help='which model to use')
     parser.add_argument('--resume', default='none', type=str, help='path to latest checkpoint (default: none)')
     parser.add_argument('--timestamp', type=str, default='none', help='timestamp for logging naming')
     parser.add_argument('--save_dir', type=str, default="./runs", help='root folder to save checkpoints and log.')
@@ -51,9 +50,10 @@ def get_args():
     parser.add_argument('--use-proper-time-limits', action='store_true', default=False, help='compute returns taking into account time limits')
     parser.add_argument('--no-recurrent-policy', action='store_false', default=True, help='do not use a recurrent policy')
     parser.add_argument('--use-linear-lr-decay', action='store_true', default=False, help='use a linear schedule on the learning rate')
+    parser.add_argument('--gpus', default=0, type=int, help='use gpu with cuda number')
     args = parser.parse_args()
 
-    args.cuda = not args.no_cuda and torch.cuda.is_available()
+    args.cuda = torch.cuda.is_available()
 
     # assert args.algo in ['a2c', 'ppo', 'acktr']
     if not args.no_recurrent_policy:

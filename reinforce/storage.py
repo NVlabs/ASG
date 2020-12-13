@@ -1,3 +1,6 @@
+# Copyright (c) 2020 NVIDIA Corporation. All rights reserved.
+# This work is licensed under a NVIDIA Open Source Non-commercial license.)
+
 import torch
 from torch.utils.data.sampler import BatchSampler, SubsetRandomSampler
 from pdb import set_trace as bp
@@ -9,7 +12,6 @@ def _flatten_helper(T, N, _tensor):
 
 class RolloutStorage(object):
     def __init__(self, num_steps, obs_shape, action_shape=1, hidden_size=1, num_recurrent_layers=1):
-        # TODO: not include num_process here since we only have one model (optimizee) each time
         # observation: (seq_len, batch_size, #lstm_input * window + #scalar_input + #actions * 1(LR))
         self.obs = torch.zeros(num_steps + 1, 1, *obs_shape)
         self.recurrent_hidden_states = torch.zeros(num_steps + 1, num_recurrent_layers, 1, hidden_size)

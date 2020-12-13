@@ -14,6 +14,9 @@ In ICML 2020.
 - [x] train resnet101 with both proxy guidance and L2O policy
 - [x] evaluation
 * GTA5 to Cityscapes
+- [x] train vgg16 with only proxy guidance
+- [x] train vgg16 with both proxy guidance and L2O policy
+- [x] evaluation
 
 ## Usage
 
@@ -61,13 +64,72 @@ python train.py \
 ```
 * Run `CUDA_VISIBLE_DEVICES=0 bash l2o_train.sh`
   - Please update the GPU index via `CUDA_VISIBLE_DEVICES` based on your need.
+
+### GTA5 &rarr; Cityscapes
+* Download the [leftImg8bit_trainvaltest.zip](https://www.cityscapes-dataset.com/file-handling/?packageID=3) and [gtFine_trainvaltest.zip](https://www.cityscapes-dataset.com/file-handling/?packageID=1) from the Cityscapes.
+* Prepare the annotations by using the [createTrainIdLabelImgs.py](https://github.com/mcordts/cityscapesScripts/blob/master/cityscapesscripts/preparation/createTrainIdLabelImgs.py).
+* Put the [file of image list](tools/datasets/cityscapes/) into where you save the dataset.
+* **Remember to properly set the `C.dataset_path` in the `config` file to the path where datasets reside.**
+
+#### Evaluation
+* Download [pretrained Vgg16 on GTA5](https://drive.google.com/file/d/13HcsiyL-o1A9057ezJ4qCnGztnY5deQ6/view?usp=sharing)
+* Put the checkpoint under `./ASG/pretrained/`
+* Put the code below in `train_seg.sh`
+```bash
+python train_seg.py \
+--epochs 50 \
+--batch-size 6 \
+--lr 1e-3 \
+--num-class 19 \
+--gpus 0 \
+--factor 0.1 \
+--lwf 75. \
+--evaluate \
+--resume ./pretrained/vgg16_segmentation_best.pth.tar
+```
+* Run `CUDA_VISIBLE_DEVICES=0 bash train_seg.sh`
+  - Please update the GPU index via `CUDA_VISIBLE_DEVICES` based on your need.
+
+#### Train with SGD
+* Put the code below in `train_seg.sh`
+```bash
+python train_seg.py \
+--epochs 50 \
+--batch-size 6 \
+--lr 1e-3 \
+--num-class 19 \
+--gpus 0 \
+--factor 0.1 \
+--lwf 75. \
+```
+* Run `CUDA_VISIBLE_DEVICES=0 bash train_seg.sh`
+  - Please update the GPU index via `CUDA_VISIBLE_DEVICES` based on your need.
+
+#### Train with L2O
+* Download [pretrained L2O Policy on GTA5](https://drive.google.com/file/d/1RVQE0VxrtPCyUpsvNulpKKBQhYlOi1ag/view?usp=sharing)
+* Put the checkpoint under `./ASG/pretrained/`
+* Put the code below in `l2o_train_seg.sh`
+```bash
+python meta_train_seg.py \
+--epochs 50 \
+--batch-size 6 \
+--lr 1e-3 \
+--num-class 19 \
+--gpus 0 \
+--gamma 0 \
+--early-stop 2 \
+--lwf 75. \
+--algo reinforce
+```
+* Run `CUDA_VISIBLE_DEVICES=0 bash l2o_train_seg.sh`
+  - Please update the GPU index via `CUDA_VISIBLE_DEVICES` based on your need.
  
 ## Citation
  
 If you use this code for your research, please cite:
  
 ```BibTeX
-@incollection{chen2020automated,
+@inproceedings{chen2020automated,
  author = {Chen, Wuyang and Yu, Zhiding and Wang, Zhangyang and Anandkumar, Anima},
  booktitle = {Proceedings of Machine Learning and Systems 2020},
  pages = {8272--8282},

@@ -2,6 +2,7 @@
 *.swp
 # caffe/pytorch model files
 runs/*
+pretrained/*
 crst_visda/runs/*
 *.pth
 *.tar
