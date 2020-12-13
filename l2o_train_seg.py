@@ -257,10 +257,18 @@ def main():
     if not os.path.exists(directory):
         os.makedirs(directory)
     filename = directory + 'train.log'
-    level = logging.INFO
-    format = '%(asctime)s  %(message)s'
-    handlers = [logging.FileHandler(filename), logging.StreamHandler()]
-    logging.basicConfig(level=level, format=format, handlers=handlers)
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
+    rootLogger = logging.getLogger()
+    logFormatter = logging.Formatter("%(asctime)s [%(levelname)-5.5s]  %(message)s")
+    fileHandler = logging.FileHandler(filename)
+    fileHandler.setFormatter(logFormatter)
+    rootLogger.addHandler(fileHandler)
+
+    consoleHandler = logging.StreamHandler()
+    consoleHandler.setFormatter(logFormatter)
+    rootLogger.addHandler(consoleHandler)
+    rootLogger.setLevel(logging.INFO)
 
     writer = SummaryWriter(directory)
     ###########################################

@@ -69,7 +69,7 @@ python train.py \
 * Download the [leftImg8bit_trainvaltest.zip](https://www.cityscapes-dataset.com/file-handling/?packageID=3) and [gtFine_trainvaltest.zip](https://www.cityscapes-dataset.com/file-handling/?packageID=1) from the Cityscapes.
 * Prepare the annotations by using the [createTrainIdLabelImgs.py](https://github.com/mcordts/cityscapesScripts/blob/master/cityscapesscripts/preparation/createTrainIdLabelImgs.py).
 * Put the [file of image list](tools/datasets/cityscapes/) into where you save the dataset.
-* **Remember to properly set the `C.dataset_path` in the `config` file to the path where datasets reside.**
+* **Remember to properly set the `C.dataset_path` in the `config_seg.py` to the path where datasets reside.**
 
 #### Evaluation
 * Download [pretrained Vgg16 on GTA5](https://drive.google.com/file/d/13HcsiyL-o1A9057ezJ4qCnGztnY5deQ6/view?usp=sharing)

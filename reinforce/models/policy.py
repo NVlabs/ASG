@@ -15,7 +15,6 @@ class Policy(nn.Module):
     def __init__(self, coord_size, input_size=(1, 1), action_space=1, hidden_size=1, window_size=1):
         # input_size: (#lstm_input, #mlp_input)
         super().__init__()
-        # TODO: should change "batch_size" to coord_size
         self.net = BasicNet(coord_size, input_size=input_size, hidden_size=hidden_size, window_size=window_size)
         # will coordinate-wisely return distributions
         self.action_distribution = Categorical(input_size[0]*hidden_size+input_size[1]+1, action_space, coord_size=coord_size)

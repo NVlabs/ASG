@@ -126,12 +126,8 @@ class Evaluator(object):
         eval during training
         """
         self.val_func = self.network
-        # TODO
         result_line, mIoU = self.multi_process_single_gpu_evaluation()
         return result_line, mIoU
-        # TODO
-        # result_line, mIoU, all_features = self.multi_process_single_gpu_evaluation()
-        # return result_line, mIoU, all_features
 
     def multi_process_single_gpu_evaluation(self):
         # start_eval_time = time.perf_counter()
@@ -151,12 +147,9 @@ class Evaluator(object):
             p.start()
 
         all_results = []
-        all_features = []  # TODO
         for _ in tqdm(range(self.ndata)):
             t = self.results_queue.get()
             all_results.append(t)
-            # _feature = self.features_queue.get()  # TODO
-            # all_features.append(_feature)  # TODO
             if self.verbose:
                 self.compute_metric(all_results)
 
@@ -164,10 +157,7 @@ class Evaluator(object):
             p.join()
 
         result_line, mIoU = self.compute_metric(all_results)
-        # logger.info('Evaluation Elapsed Time: %.2fs' % (time.perf_counter() - start_eval_time))
-        # TODO
         return result_line, mIoU
-        # return result_line, mIoU, all_features
 
     def multi_process_evaluation(self):
         start_eval_time = time.perf_counter()
@@ -206,11 +196,8 @@ class Evaluator(object):
         # logger.info('Load Model on Device %d: %.2fs' % (device, time.time() - start_load_time))
         for idx in shred_list:
             dd = self.dataset[idx]
-            # TODO
             results_dict = self.func_per_iteration(dd, device, iter=idx)
-            # results_dict, _feature = self.func_per_iteration(dd, device, iter=idx)
             self.results_queue.put(results_dict)
-            # self.features_queue.put(_feature)  # TODO
 
 
     def func_per_iteration(self, data, device, iter=None):
@@ -226,9 +213,7 @@ class Evaluator(object):
         else:
             img = self.process_image(img, resize=resize, crop_size=input_size)
 
-        # TODO
         pred = self.val_func_process(img, device)
-        # pred, _feature = self.val_func_process(img, device)
         if input_size is not None:
             pred = pred[:, margin[0]:(pred.shape[1] - margin[1]), margin[2]:(pred.shape[2] - margin[3])]
         pred = pred.permute(1, 2, 0)
@@ -238,11 +223,7 @@ class Evaluator(object):
                               (output_size[1], output_size[0]),
                               interpolation=cv2.INTER_LINEAR)
 
-        # pred = pred.argmax(2)
-
-        # TODO
         return pred
-        # return pred, _feature
 
     # slide the window to evaluate the image
     def sliding_eval(self, img, crop_size, stride_rate, device=None):
@@ -322,10 +303,7 @@ class Evaluator(object):
             self.val_func.eval()
             self.val_func.to(input_data.get_device())
             with torch.no_grad():
-                # TODO
                 score = self.val_func(input_data, output_features=[], task='new_seg')[0]
-                # score, _feature = self.val_func(input_data, output_features=['gap'], task='new_seg')  # TODO
-                # _feature = _feature['gap']  # TODO
                 if (isinstance(score, tuple) or isinstance(score, list)) and len(score) > 1:
                     score = score[self.out_idx]
                 score = score[0] # a single image pass, ignore batch dim
@@ -338,9 +316,7 @@ class Evaluator(object):
                 score = torch.exp(score)
                 # score = score.data
 
-        # TODO
         return score
-        # return score, _feature
 
     def process_image(self, img, resize=None, crop_size=None):
         p_img = img

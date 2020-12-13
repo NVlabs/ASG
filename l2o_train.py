@@ -89,7 +89,6 @@ def train_step(args, _window_size, train_loader_iter, train_loader, model, optim
         fc_std = [sum(fc_std) / len(fc_std)]
         optimizee_step = [sum(optimizee_step) / len(optimizee_step)]
     losses = [loss for loss in losses]
-    # TODO: log loss cannot be inf
     losses_kl = [loss_kl for loss_kl in losses_kl]
     optimizee_step = [torch.tensor(step).cuda() for step in optimizee_step]
     observation = torch.stack(losses + losses_kl + optimizee_step + fc_mean + fc_std, dim=0)
@@ -200,7 +199,6 @@ def main():
     action_space = np.arange(0, 1.1, 0.1)
     obs_avg = True
     _window_size = 1
-    # TODO: currently default obs_avg = True: cannot change window_size in agent
     window_size = 1 if obs_avg else _window_size
     window_shrink_size = 20 # larger: controller will be updated more frequently
     sgd_in_names = ["conv1", "bn1", "layer1", "layer2", "layer3", "layer4", "fc_new"]
