@@ -1,6 +1,6 @@
 ![Python 3.7](https://img.shields.io/badge/python-3.7-green.svg)
  
-# ASG
+# ASG: Automated Synthetic-to-Real Generalization
  
 <!-- ### [Project](https://) | [Paper](https://arxiv.org/abs/2007.06965) -->
 [Paper](https://arxiv.org/abs/2007.06965)
@@ -66,6 +66,7 @@ python train.py \
   - Please update the GPU index via `CUDA_VISIBLE_DEVICES` based on your need.
 
 ### GTA5 &rarr; Cityscapes
+* Download [GTA5 dataset](https://download.visinf.tu-darmstadt.de/data/from_games/).
 * Download the [leftImg8bit_trainvaltest.zip](https://www.cityscapes-dataset.com/file-handling/?packageID=3) and [gtFine_trainvaltest.zip](https://www.cityscapes-dataset.com/file-handling/?packageID=1) from the Cityscapes.
 * Prepare the annotations by using the [createTrainIdLabelImgs.py](https://github.com/mcordts/cityscapesScripts/blob/master/cityscapesscripts/preparation/createTrainIdLabelImgs.py).
 * Put the [file of image list](tools/datasets/cityscapes/) into where you save the dataset.
