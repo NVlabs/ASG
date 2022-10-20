@@ -56,11 +56,12 @@ python train.py \
 * Put the checkpoint under `./ASG/pretrained/`
 * Put the code below in `l2o_train.sh`
 ```bash
-python train.py \
+python l2o_train.py \
 --epochs 30 \
 --batch-size 32 \
 --lr 1e-4 \
---lwf 0.1
+--lwf 0.1 \
+--agent_load_dir ./ASG/pretrained/policy_res101_vista17.pth
 ```
 * Run `CUDA_VISIBLE_DEVICES=0 bash l2o_train.sh`
   - Please update the GPU index via `CUDA_VISIBLE_DEVICES` based on your need.
@@ -111,7 +112,7 @@ python train_seg.py \
 * Put the checkpoint under `./ASG/pretrained/`
 * Put the code below in `l2o_train_seg.sh`
 ```bash
-python meta_train_seg.py \
+python l2o_train_seg.py \
 --epochs 50 \
 --batch-size 6 \
 --lr 1e-3 \
@@ -120,7 +121,8 @@ python meta_train_seg.py \
 --gamma 0 \
 --early-stop 2 \
 --lwf 75. \
---algo reinforce
+--algo reinforce \
+--agent_load_dir ./ASG/pretrained/policy_vgg16_segmentation.pth
 ```
 * Run `CUDA_VISIBLE_DEVICES=0 bash l2o_train_seg.sh`
   - Please update the GPU index via `CUDA_VISIBLE_DEVICES` based on your need.
